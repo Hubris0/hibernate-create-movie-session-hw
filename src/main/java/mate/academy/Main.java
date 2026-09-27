@@ -2,26 +2,19 @@ package mate.academy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import mate.academy.dao.CinemaHallDao;
-import mate.academy.dao.MovieDao;
-import mate.academy.dao.MovieSessionDao;
-import mate.academy.dao.impl.CinemaHallDaoImpl;
-import mate.academy.dao.impl.MovieDaoImpl;
-import mate.academy.dao.impl.MovieSessionDaoImpl;
+import mate.academy.lib.Injector;
 import mate.academy.model.CinemaHall;
 import mate.academy.model.Movie;
 import mate.academy.model.MovieSession;
 import mate.academy.service.CinemaHallService;
 import mate.academy.service.MovieService;
 import mate.academy.service.MovieSessionService;
-import mate.academy.service.impl.CinemaHallServiceImpl;
-import mate.academy.service.impl.MovieServiceImpl;
-import mate.academy.service.impl.MovieSessionServiceImpl;
+
 
 public class Main {
     public static void main(String[] args) {
-        CinemaHallDao cinemaHallDao = new CinemaHallDaoImpl();
-        CinemaHallService cinemaHallService = new CinemaHallServiceImpl(cinemaHallDao);
+        Injector injector = Injector.getInstance("mate.academy");
+        CinemaHallService cinemaHallService = (CinemaHallService) injector.getInstance(CinemaHallService.class);
         CinemaHall moviePark = new CinemaHall();
         moviePark.setDescription("A screen set up in a park for public view");
         moviePark.setCapacity(300);
@@ -38,8 +31,7 @@ public class Main {
         cinemaHallService.getAll().forEach(System.out::println);
         System.out.println("TEST 2 concluded");
 
-        MovieDao movieDao = new MovieDaoImpl();
-        MovieService movieService = new MovieServiceImpl(movieDao);
+        MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setDescription("An action film about street racing, heists, and spies.");
         movieService.add(fastAndFurious);
@@ -54,8 +46,8 @@ public class Main {
         screening.setMovie(fastAndFurious);
         screening.setShowTime(showTime);
 
-        MovieSessionDao movieSessionDao = new MovieSessionDaoImpl();
-        MovieSessionService movieSessionService = new MovieSessionServiceImpl(movieSessionDao);
+        MovieSessionService movieSessionService =
+                (MovieSessionService) injector.getInstance(MovieSessionService.class);
         movieSessionService.add(screening);
         System.out.println("TEST 5: get movie session by id: "
                 + movieSessionService.get(screening.getId()));

@@ -10,11 +10,7 @@ import mate.academy.service.CinemaHallService;
 @Service
 public class CinemaHallServiceImpl implements CinemaHallService {
     @Inject
-    private final CinemaHallDao cinemaHallDao;
-
-    public CinemaHallServiceImpl(CinemaHallDao cinemaHallDao) {
-        this.cinemaHallDao = cinemaHallDao;
-    }
+    private CinemaHallDao cinemaHallDao;
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
