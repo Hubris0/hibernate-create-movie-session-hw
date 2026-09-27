@@ -25,8 +25,9 @@ public class Main {
         helios.setCapacity(500);
         cinemaHallService.add(helios);
 
-        System.out.println("TEST 1: get cinema hall by id: " + cinemaHallService.get(helios.getId()));
-        System.out.println("TEST 2: get all cinema halls: ") ;
+        System.out.println("TEST 1: get cinema hall by id: "
+                + cinemaHallService.get(helios.getId()));
+        System.out.println("TEST 2: get all cinema halls: ");
         cinemaHallService.getAll().forEach(System.out::println);
         System.out.println("TEST 2 concluded");
 
@@ -47,9 +48,11 @@ public class Main {
 
         MovieSessionService movieSessionService = new MovieSessionServiceImpl();
         movieSessionService.add(screening);
-        System.out.println("TEST 5: get movie session by id: " + movieSessionService.get(screening.getId()));
+        System.out.println("TEST 5: get movie session by id: "
+                + movieSessionService.get(screening.getId()));
         LocalDate date = LocalDate.parse("2020-01-23");
-        System.out.println("TEST 6: get session available for a movie and input date: " + movieSessionService
+        System.out.println("TEST 6: get session available for a movie and input date: "
+                + movieSessionService
                 .findAvailableSessions(fastAndFurious.getId(), date));
 
     }
