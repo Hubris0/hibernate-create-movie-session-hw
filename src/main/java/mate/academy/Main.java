@@ -10,11 +10,11 @@ import mate.academy.service.CinemaHallService;
 import mate.academy.service.MovieService;
 import mate.academy.service.MovieSessionService;
 
-
 public class Main {
     public static void main(String[] args) {
         Injector injector = Injector.getInstance("mate.academy");
-        CinemaHallService cinemaHallService = (CinemaHallService) injector.getInstance(CinemaHallService.class);
+        CinemaHallService cinemaHallService =
+                (CinemaHallService) injector.getInstance(CinemaHallService.class);
         CinemaHall moviePark = new CinemaHall();
         moviePark.setDescription("A screen set up in a park for public view");
         moviePark.setCapacity(300);
