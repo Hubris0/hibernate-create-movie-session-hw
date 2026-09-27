@@ -2,6 +2,13 @@ package mate.academy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import mate.academy.dao.CinemaHallDao;
+import mate.academy.dao.MovieDao;
+import mate.academy.dao.MovieSessionDao;
+import mate.academy.dao.impl.CinemaHallDaoImpl;
+import mate.academy.dao.impl.MovieDaoImpl;
+import mate.academy.dao.impl.MovieSessionDaoImpl;
 import mate.academy.model.CinemaHall;
 import mate.academy.model.Movie;
 import mate.academy.model.MovieSession;
@@ -14,7 +21,8 @@ import mate.academy.service.impl.MovieSessionServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        CinemaHallService cinemaHallService = new CinemaHallServiceImpl();
+        CinemaHallDao cinemaHallDao = new CinemaHallDaoImpl();
+        CinemaHallService cinemaHallService = new CinemaHallServiceImpl(cinemaHallDao);
         CinemaHall moviePark = new CinemaHall();
         moviePark.setDescription("A screen set up in a park for public view");
         moviePark.setCapacity(300);
@@ -31,7 +39,8 @@ public class Main {
         cinemaHallService.getAll().forEach(System.out::println);
         System.out.println("TEST 2 concluded");
 
-        MovieService movieService = new MovieServiceImpl();
+        MovieDao movieDao = new MovieDaoImpl();
+        MovieService movieService = new MovieServiceImpl(movieDao);
         Movie fastAndFurious = new Movie("Fast and Furious");
         fastAndFurious.setDescription("An action film about street racing, heists, and spies.");
         movieService.add(fastAndFurious);
@@ -46,7 +55,8 @@ public class Main {
         screening.setMovie(fastAndFurious);
         screening.setShowTime(showTime);
 
-        MovieSessionService movieSessionService = new MovieSessionServiceImpl();
+        MovieSessionDao movieSessionDao = new MovieSessionDaoImpl();
+        MovieSessionService movieSessionService = new MovieSessionServiceImpl(movieSessionDao);
         movieSessionService.add(screening);
         System.out.println("TEST 5: get movie session by id: "
                 + movieSessionService.get(screening.getId()));
