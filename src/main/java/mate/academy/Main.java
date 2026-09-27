@@ -2,7 +2,6 @@ package mate.academy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import mate.academy.dao.CinemaHallDao;
 import mate.academy.dao.MovieDao;
 import mate.academy.dao.MovieSessionDao;
